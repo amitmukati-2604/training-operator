@@ -1,6 +1,7 @@
 name: Publish Training Images
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
@@ -13,7 +14,7 @@ jobs:
   trial:
     name: Publish Image
     # Trigger workflow only for kubeflow/training-operator repository.
-    if: github.repository == 'kubeflow/training-operator'
+    #if: github.repository == 'kubeflow/training-operator'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -22,7 +23,7 @@ jobs:
       - name: Publish Docker Images ${{ matrix.name }}
         uses: ./.github/workflows/template-publish-image
         with:
-          image: docker.io/kubeflow/${{ matrix.name }}
+          image: amitmukati2604/${{ matrix.name }}
           dockerfile: ${{ matrix.dockerfile }}
 
     strategy:
